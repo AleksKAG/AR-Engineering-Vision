@@ -38,3 +38,8 @@ AR-система реального времени для визуализац�
 5.	Element service
 6.	AR calibration service
 7.	AI error detection service
+
+## Автор
+Квачёв Александр — Go-разработчик  
+GitHub: [AleksKAG](https://github.com/AleksKAG)  
+Telegram: [@Kurtalex27](https://t.me/Kurtalex27)
