@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- AR View (камера и 3D-сцена) -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/ar_fragment"
+        android:name="com.google.ar.sceneform.ux.ArFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- UI Overlay (согласно ТЗ) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:background="#CC000000"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:radius="8dp">
+
+        <!-- Информационная панель -->
+        <TextView
+            android:id="@+id/tv_info_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="Наведите камеру на плоскость и нажмите"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:visibility="visible" />
+
+        <!-- Кнопки действий -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <Button
+                android:id="@+id/btn_photo"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:text="📷 Фото" />
+
+            <Button
+                android:id="@+id/btn_check"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:text="✅ Проверить" />
+
+            <Button
+                android:id="@+id/btn_layers"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:text="📂 Слои" />
+                
+            <Button
+                android:id="@+id/btn_back"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="⬅ Назад" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
