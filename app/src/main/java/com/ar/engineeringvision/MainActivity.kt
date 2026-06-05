@@ -41,9 +41,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupButtons() {
-        findViewById<Button>(R.id.btn_photo).setOnClickListener {
-            Toast.makeText(this, "Фото сохранено и отправлено на /api/v1/elements/{id}/issues", Toast.LENGTH_SHORT).show()
-        }
+     findViewById<Button>(R.id.btn_photo).setOnClickListener {
+    if (currentAnchor == null) {
+        Toast.makeText(this, "Сначала разместите элемент на плоскости", Toast.LENGTH_SHORT).show()
+        return@setOnClickListener
+    }
+    
+    // В реальном приложении здесь открывается CameraX для снимка
+    // Для MVP эмулируем отправку:
+    val mockDeviation = "72"
+    val mockComment = "Смещение относительно оси стены"
+    val mockElementType = "duct" // Тип элемента, который мы проверяем
+    
+    Toast.makeText(this, "📸 Отправка фото на AI-анализ...", Toast.LENGTH_LONG).show()
+    
+    // Здесь должен быть вызов Retrofit API:
+    // apiService.uploadIssue(elementId, photoFile, mockComment, mockDeviation, mockElementType)
+    
+    updateOverlayUI("Воздуховод 600x300", "$mockDeviation мм (AI: Проверка...)")
+}
         findViewById<Button>(R.id.btn_check).setOnClickListener {
             Toast.makeText(this, "Запуск AI-проверки смещения...", Toast.LENGTH_SHORT).show()
         }
