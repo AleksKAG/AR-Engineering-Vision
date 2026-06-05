@@ -29,8 +29,14 @@ func NewRouter(db *store.DB, s3c *s3.Client, cfg *Config) http.Handler {
 	// --- ISSUES (Фотофиксация и замечания) ---
 	r.HandleFunc("/api/v1/elements/{element_id}/issues", Auth(CreateIssue(db, s3c))).Methods("POST")
 	
-// Внутренний API для Python-конвертера (в продакшене стоит закрыть middleware'ем или сетью)
-r.HandleFunc("/api/v1/internal/bim-processed", ProcessBimCallback(db)).Methods("POST")
+    // Внутренний API для Python-конвертера (в продакшене стоит закрыть middleware'ем или сетью)
+    r.HandleFunc("/api/v1/internal/bim-processed", ProcessBimCallback(db)).Methods("POST")
+	
+	// AI Анализ фото (привязка к элементу)
+    r.HandleFunc("/api/v1/elements/{element_id}/issues", Auth(AnalyzeAndSaveIssue(db, s3c, cfg.AIServiceURL))).Methods("POST")
+
+    // Генерация PDF отчёта по проекту
+    r.HandleFunc("/api/v1/projects/{project_id}/report", Auth(GenerateReport(db, s3c))).Methods("POST")
 	
 	// --- HEALTH ---
 	r.HandleFunc("/api/v1/admin/health", func(w http.ResponseWriter, r *http.Request) {
