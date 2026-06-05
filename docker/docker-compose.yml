@@ -10,6 +10,7 @@ services:
       - S3_BUCKET=ar-models
       - S3_ACCESS_KEY=minioadmin
       - S3_SECRET_KEY=minioadmin
+      - AI_SERVICE_URL=http://ai-service:8000
     depends_on:
       - postgres
       - minio
@@ -37,7 +38,7 @@ services:
     volumes:
       - minio-data:/data
 
-  # --- НОВЫЙ СЕРВИС: BIM CONVERTER ---
+  # --- СЕРВИС: BIM CONVERTER ---
   bim-converter:
     build: ./bim-converter
     environment:
@@ -49,7 +50,16 @@ services:
     depends_on:
       - minio
       - app
+ 
+  # --- СЕРВИС: AI ANALYSIS ---    
+  ai-service:
+    build: ./ai-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ai-models:/root/.ultralytics # Кэшируем веса YOLO между перезапусками
 
 volumes:
   minio-data:
   postgres-data:
+  ai-models: 
